@@ -73,3 +73,32 @@ function showQuestion() {
     document.getElementById("answer_3").innerHTML = question['answer_3'];
     document.getElementById("answer_4").innerHTML = question['answer_4'];
 }
+
+function answer(selection) { // Funktion wird eingeleitet
+    let question = questions[currentQuestion]; // Variable question sagt, dass die aktuelle Frage die Werte aus der Frage 0 (also der 1. Frage in normalen Zahlen) aus dem Array questions umfasst
+    let selectedQuestionNumber = selection.slice(-1); // Die Variable selectedQuestionNumber gibt den letzten Buchstaben, bzw. die letzte Zahl von der vom Nutzer ausgewählten Frage wieder (Beispiel: wenn der Nutzer answer_1 auswählt, dann ist selection.slice(-1) die Zahl 1, weil 1 der letzte Buchstabe, bzw. die letzte Zahl von answer_1 ist)
+    let idOfRightAnswer = `answer_${question['right_answer']}`;
+
+    if (selectedQuestionNumber == question['right_answer']) { // If-Abfrage eingeleitet & es wird gesagt: WENN selectedQuestionNumber (also die Variable aus Zeile 80, die den letzten Buchstaben/die letzte Zahl der ausgewählten Frage wiedergibt) dieselbe Zahl ist, wie die richtige Antwort, die im JSON hinterlegt ist, dann... (nächste Zeile) 
+        document.getElementById(selection).parentNode.classList.add('bg-success'); // zur Div der jeweilig ausgewählten Antwort wird, insofern die korrekte Antwort vom Nutzer ausgewählt worden ist, eine grüne Farbe hinzugefügt
+    } else { // wenn letzte Zahl von der von Nutzer ausgewählten Frage aber nicht mit der im JSON hinterlegten richtigen Zahl übereinstimmt, dann...(siehe nächste Zeile)
+        document.getElementById(selection).parentNode.classList.add('bg-danger'); // wenn der Nutzer die falsche Antwort ausgewählt hat, wird zur Div der falsche Antwort eine rote Farbe hinzugefügt
+        document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success'); // wenn Nutzer die falsche Antwort ausgewählt hat, wird ihm die richtige Antwort, in diesen Fall die Antwort 3, direkt als Hilfe grün angeziegt
+    }
+    document.getElementById('next-button').disabled = false;
+}
+
+function nextQuestion() {
+    document.getElementById('current-question').value + 1;
+    currentQuestion++; // z.b. von 0 auf 1 erhöht
+    document.getElementById('next-button').disabled = true;
+    resetAnswerButtons();
+    showQuestion();
+}
+
+function resetAnswerButtons() {
+    document.getElementById("answer_1").parentNode.classList.remove('bg-success', 'bg-danger')
+    document.getElementById("answer_2").parentNode.classList.remove('bg-success', 'bg-danger')
+    document.getElementById("answer_3").parentNode.classList.remove('bg-success', 'bg-danger')
+    document.getElementById("answer_4").parentNode.classList.remove('bg-success', 'bg-danger')
+}
