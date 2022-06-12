@@ -20,13 +20,51 @@
 
 </head>
 
-<body>
+<body onload="init()">
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
             <span class="navbar-brand mb-0 h1">Navbar</span>
         </div>
     </nav>
-    <h1>Quizapp</h1>
+    <div class="container">
+        <div class="card quizcard">
+            <img src="img/quizbg.jpg " class="card-img-top ">
+            <div class="card-body ">
+                <h5 class="card-title" id="questiontext">Frage</h5>
+                <div class="card mb-2 ">
+                    <div class="card-body " id="answer_1">
+                        Antwort
+                    </div>
+                </div>
+
+                <div class="card mb-2 ">
+                    <div class="card-body " id="answer_2">
+                        Antwort
+                    </div>
+                </div>
+
+                <div class="card mb-2 ">
+                    <div class="card-body " id="answer_3">
+                        Antwort
+                    </div>
+                </div>
+
+                <div class="card mb-2 ">
+                    <div class="card-body " id="answer_4">
+                        Antwort
+                    </div>
+                </div>
+
+                <div class="question-footer ">
+                    <span>
+                        <b >1</b> von <b id="all-questions"></b> Fragen
+                    </span>
+
+                    <button class="btn btn-primary">Nächste Frage</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
