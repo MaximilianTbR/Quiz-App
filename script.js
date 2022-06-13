@@ -56,6 +56,8 @@ let questions = [{
     }
 ];
 
+let rightQuestions = 0;
+
 let currentQuestion = 0;
 
 function init() {
@@ -65,13 +67,28 @@ function init() {
 }
 
 function showQuestion() {
-    let question = questions[currentQuestion];
 
-    document.getElementById("questiontext").innerHTML = question['question'];
-    document.getElementById("answer_1").innerHTML = question['answer_1'];
-    document.getElementById("answer_2").innerHTML = question['answer_2'];
-    document.getElementById("answer_3").innerHTML = question['answer_3'];
-    document.getElementById("answer_4").innerHTML = question['answer_4'];
+    if (currentQuestion >= questions.length) { // show endscreen
+        document.getElementById("end-screen").style = '';
+        document.getElementById("question-body").style = 'display: none;';
+        document.getElementById("amount-of-questions").innerHTML = questions.length;
+        document.getElementById("amount-of-right-questions").innerHTML = rightQuestions;
+        document.getElementById("header-img").src = 'img/endscreenwin.png';
+    } else { // show question
+
+        let percent = currentQuestion / questions.length;
+
+        console.log('Fortschritt:', percent)
+
+        let question = questions[currentQuestion];
+
+        document.getElementById("question-number").innerHTML = currentQuestion + 1;
+        document.getElementById("questiontext").innerHTML = question['question'];
+        document.getElementById("answer_1").innerHTML = question['answer_1'];
+        document.getElementById("answer_2").innerHTML = question['answer_2'];
+        document.getElementById("answer_3").innerHTML = question['answer_3'];
+        document.getElementById("answer_4").innerHTML = question['answer_4'];
+    }
 }
 
 function answer(selection) { // Funktion wird eingeleitet
@@ -81,6 +98,7 @@ function answer(selection) { // Funktion wird eingeleitet
 
     if (selectedQuestionNumber == question['right_answer']) { // If-Abfrage eingeleitet & es wird gesagt: WENN selectedQuestionNumber (also die Variable aus Zeile 80, die den letzten Buchstaben/die letzte Zahl der ausgewählten Frage wiedergibt) dieselbe Zahl ist, wie die richtige Antwort, die im JSON hinterlegt ist, dann... (nächste Zeile) 
         document.getElementById(selection).parentNode.classList.add('bg-success'); // zur Div der jeweilig ausgewählten Antwort wird, insofern die korrekte Antwort vom Nutzer ausgewählt worden ist, eine grüne Farbe hinzugefügt
+        rightQuestions++; // die Variable rightQuestions wird um eines erhöht, wenn der Nutzer die jew. Frage richtig beantwortet
     } else { // wenn letzte Zahl von der von Nutzer ausgewählten Frage aber nicht mit der im JSON hinterlegten richtigen Zahl übereinstimmt, dann...(siehe nächste Zeile)
         document.getElementById(selection).parentNode.classList.add('bg-danger'); // wenn der Nutzer die falsche Antwort ausgewählt hat, wird zur Div der falsche Antwort eine rote Farbe hinzugefügt
         document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success'); // wenn Nutzer die falsche Antwort ausgewählt hat, wird ihm die richtige Antwort, in diesen Fall die Antwort 3, direkt als Hilfe grün angeziegt
@@ -89,7 +107,6 @@ function answer(selection) { // Funktion wird eingeleitet
 }
 
 function nextQuestion() {
-    document.getElementById('current-question').value + 1;
     currentQuestion++; // z.b. von 0 auf 1 erhöht
     document.getElementById('next-button').disabled = true;
     resetAnswerButtons();
