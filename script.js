@@ -36,7 +36,7 @@ let questions = [{
         "answer_2": "Um einen neuen Array zu erstellen",
         "answer_3": "Um etwas zu einem Array hinzuzufügen und anschließend zu rendern",
         "answer_4": "Um den Computer herunterzufahren",
-        "right_answer": 2
+        "right_answer": 1
     },
     {
         "question": "Wer hat JavaScript erfunden",
@@ -76,7 +76,10 @@ function showQuestion() {
         document.getElementById("header-img").src = 'img/endscreenwin.png';
     } else { // show question
 
-        let percent = currentQuestion / questions.length;
+        let percent = (currentQuestion + 1) / questions.length;
+        percent = Math.round(percent * 100);
+        document.getElementById("progress-bar").innerHTML = `${percent}%`;
+        document.getElementById("progress-bar").style = `width: ${percent}%;`;
 
         console.log('Fortschritt:', percent)
 
@@ -118,4 +121,15 @@ function resetAnswerButtons() {
     document.getElementById("answer_2").parentNode.classList.remove('bg-success', 'bg-danger')
     document.getElementById("answer_3").parentNode.classList.remove('bg-success', 'bg-danger')
     document.getElementById("answer_4").parentNode.classList.remove('bg-success', 'bg-danger')
+}
+
+function restartGame() {
+    document.getElementById('header-img').src = 'img/quizbg.jpg';
+    document.getElementById("end-screen").style = 'display: none;'; // questionbody wieder anzeigen
+    document.getElementById("question-body").style = ';'; // Endscreen ausblenden
+
+    currentQuestion = 0;
+    rightQuestions = 0;
+
+    init();
 }
