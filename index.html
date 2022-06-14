@@ -26,7 +26,7 @@
             <span class="navbar-brand mb-0 h1">Navbar</span>
         </div>
     </nav>
-    <div class="container">
+    <div class="container responsive-container-card-indiv" id="container">
         <div class="card quizcard">
             <img src="img/quizbg.jpg" id="header-img" class="card-img-top ">
 
@@ -38,14 +38,14 @@
                 <div class="text-center final-headline">Quiz beendet!</div>
 
                 <div class="text-center">
-                    Du hast <b id="amount-of-right-questions"></b> von <b id="amount-of-questions">7</b> Fragen richtig beantwortet
+                    Du hast <b id="amount-of-right-questions"></b> von <b id="amount-of-questions">7</b> Fragen richtig beantwortet!
                 </div>
                 <div class="button-row">
                     <button onclick="restartGame()" class="btn btn-primary">Erneut spielen</button>
                 </div>
             </div>
 
-            <div class="card-body" id="question-body">
+            <div class="card-body card-box-margin-indiv" id="question-body">
                 <h5 class="card-title" id="questiontext">Frage</h5>
                 <div class="card mb-2 quiz-answer-card" onclick="answer('answer_1')">
                     <div class="card-body " id="answer_1">
